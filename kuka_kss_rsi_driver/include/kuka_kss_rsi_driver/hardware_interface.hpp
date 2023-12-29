@@ -56,6 +56,7 @@
 #include "hardware_interface/system_interface.hpp"
 
 #include "kuka_kss_rsi_driver/udp_server.h"
+#include "kuka_kss_rsi_driver/rsi_udp_server.h"
 #include "kuka_kss_rsi_driver/rsi_state.h"
 #include "kuka_kss_rsi_driver/rsi_command.h"
 #include "kuka_kss_rsi_driver/visibility_control.h"

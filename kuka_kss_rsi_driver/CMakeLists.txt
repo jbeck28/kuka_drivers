@@ -23,7 +23,7 @@ find_package(kuka_drivers_core REQUIRED)
 find_package(hardware_interface REQUIRED)
 find_package(controller_manager_msgs REQUIRED)
 find_package(pluginlib REQUIRED)
-
+find_package(Boost REQUIRED COMPONENTS regex system thread)
 find_package(tinyxml_vendor REQUIRED)
 find_package(TinyXML REQUIRED)
 
@@ -42,7 +42,16 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC "PLUGINLIB__DISABLE_BOOST_FUNC
 ament_target_dependencies(${PROJECT_NAME} rclcpp sensor_msgs hardware_interface)
 target_link_libraries(${PROJECT_NAME} tinyxml)
 
+add_library(${PROJECT_NAME}_components src/rsi_udp_server.cpp
+  src/generic_udp_server.cpp)
 
+target_link_libraries(${PROJECT_NAME}_components PUBLIC
+  Boost::regex
+  Boost::system
+  Boost::thread
+  ${PROTOBUF_LIBRARIES}
+  Threads::Threads
+)
 
 add_executable(robot_manager_node
   src/robot_manager_node.cpp)
